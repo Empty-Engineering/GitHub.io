@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - CPN Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
+    <style>
+        body {
+            font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #005ea5; /* GOV.UK primary color */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .form-section {
+            padding: 20px;
+            max-width: 500px;
+            margin: 50px auto;
+            border: 1px solid #d8d8d8;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        .form-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .form-section input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .form-section button {
+            width: 100%;
+            padding: 10px;
+            background-color: #005ea5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .form-section button:hover {
+            background-color: #004080;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="https://cpnacademy.co.uk">CPN Academy</a>
+    </header>
+
+    <section class="form-section">
+        <h2>Sign In</h2>
+        <form id="signin-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </section>
+
+    <script>
+        document.getElementById('signin-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                if (response.ok) {
+                    alert('Login successful! Redirecting to your dashboard.');
+                    window.location.href = '/dashboard.html'; // Update with actual dashboard URL
+                } else {
+                    const result = await response.json();
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Failed to sign in. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
