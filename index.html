@@ -8,28 +8,32 @@
     <style>
         body {
             font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
+            margin: 0;
+            padding: 0;
         }
         .header {
             background-color: #005ea5; /* GOV.UK primary color */
             color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 20px;
+            text-align: center;
         }
         .header a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.5rem;
         }
         .nav-bar {
             background-color: #f3f2f1; /* Neutral background */
             padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         .nav-bar a {
-            margin-right: 15px;
             color: #005ea5; /* GOV.UK blue */
             text-decoration: none;
+            font-size: 1rem;
         }
         .hero-section {
             background-color: #eef5ff; /* Light blue */
@@ -42,76 +46,83 @@
         }
         .hero-section p {
             font-size: 1.2rem;
+            margin-bottom: 20px;
         }
-        .main-content {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .course-card {
-            border: 1px solid #d8d8d8;
+        .cta-button {
+            background-color: #005ea5;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            padding: 15px;
-            background-color: white;
+            font-size: 1rem;
+            display: inline-block;
         }
-        .course-card h2 {
+        .cta-button:hover {
+            background-color: #004080;
+        }
+        .features-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        .feature-card {
+            max-width: 300px;
+            background-color: #f3f2f1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-card h3 {
             font-size: 1.5rem;
-        }
-        .course-card p {
             margin-bottom: 10px;
         }
+        .feature-card p {
+            font-size: 1rem;
+        }
         .footer {
-            background-color: #0b0c0c; /* Dark background */
+            background-color: #0b0c0c;
             color: white;
             text-align: center;
             padding: 20px;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <a href="#">CPN Academy</a>
-        </div>
-        <nav>
-            <a href="#">Sign In</a>
-            <a href="https://cpnacademy.co.uk/signup">Sign Up</a>
-        </nav>
+        <a href="https://cpnacademy.co.uk">CPN Academy</a>
     </header>
 
     <nav class="nav-bar">
         <a href="#">Home</a>
-        <a href="#">Courses</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
     </nav>
 
     <section class="hero-section">
         <h1>Welcome to CPN Academy</h1>
-        <p>Explore a variety of courses to enhance your skills and achieve your goals. CPN Academy is proudly run by CPN Industries.</p>
+        <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+        <a href="https://cpnacademy.co.uk/signup" class="cta-button">Get Started</a>
     </section>
 
-    <main class="main-content">
-        <div class="course-card">
-            <h2>Course Title 1</h2>
-            <p>Short description of the course content and learning objectives.</p>
-            <a href="#" class="govuk-button">Learn More</a>
+    <section class="features-section">
+        <div class="feature-card">
+            <h3>Top-notch Courses</h3>
+            <p>Learn from industry experts and advance your skills with our carefully crafted curriculum.</p>
         </div>
-        <div class="course-card">
-            <h2>Course Title 2</h2>
-            <p>Short description of the course content and learning objectives.</p>
-            <a href="#" class="govuk-button">Learn More</a>
+        <div class="feature-card">
+            <h3>Flexible Learning</h3>
+            <p>Study at your own pace with access to courses 24/7, wherever you are.</p>
         </div>
-        <!-- Additional course cards can be added here -->
-    </main>
+        <div class="feature-card">
+            <h3>Global Community</h3>
+            <p>Join a diverse community of learners and network with professionals worldwide.</p>
+        </div>
+    </section>
 
     <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
     </footer>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6511534668087715"
-     crossorigin="anonymous"></script>
 </body>
 </html>
