@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CPN Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
+    <style>
+        body {
+            font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #005ea5; /* GOV.UK primary color */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .form-section {
+            padding: 20px;
+            max-width: 500px;
+            margin: 50px auto;
+            border: 1px solid #d8d8d8;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        .form-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .form-section input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .form-section button {
+            width: 100%;
+            padding: 10px;
+            background-color: #005ea5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .form-section button:hover {
+            background-color: #004080;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="https://cpnacademy.co.uk">CPN Academy</a>
+    </header>
+
+    <section class="form-section">
+        <h2>Create Your Account</h2>
+        <form id="signup-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="forename">Forename:</label>
+            <input type="text" id="forename" name="forename" required>
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label for="birthday">Birthday (DD.MM.YYYY):</label>
+            <input type="text" id="birthday" name="birthday" pattern="\d{2}\.\d{2}\.\d{4}" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Send Verification Code</button>
+        </form>
+
+        <form id="verify-form" class="hidden">
+            <label for="verification-code">Verification Code:</label>
+            <input type="text" id="verification-code" name="verification-code" required>
+
+            <button type="submit">Verify & Register</button>
+        </form>
+    </section>
+
+    <script>
+        const signupForm = document.getElementById('signup-form');
+        const verifyForm = document.getElementById('verify-form');
+        let verificationCodeHash = '';
+
+        async function hashCode(code) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(code);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        signupForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const forename = document.getElementById('forename').value;
+            const surname = document.getElementById('surname').value;
+            const birthday = document.getElementById('birthday').value;
+            const password = document.getElementById('password').value;
+
+            // Generate random 6-digit code
+            const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            verificationCodeHash = await hashCode(verificationCode);
+
+            try {
+                // Simulate sending email using SMTP (replace with actual backend)
+                alert(`Verification code sent to ${email}: ${verificationCode}`); // Display for testing only
+
+                signupForm.classList.add('hidden');
+                verifyForm.classList.remove('hidden');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send verification code.');
+            }
+        });
+
+        verifyForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const verificationCode = document.getElementById('verification-code').value;
+            const enteredCodeHash = await hashCode(verificationCode);
+
+            if (enteredCodeHash !== verificationCodeHash) {
+                alert('Invalid verification code.');
+                return;
+            }
+
+            const email = document.getElementById('email').value;
+            const forename = document.getElementById('forename').value;
+            const surname = document.getElementById('surname').value;
+            const birthday = document.getElementById('birthday').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Simulate user registration (replace with actual backend)
+                alert('User registered successfully!');
+                window.location.href = 'https://cpnacademy.co.uk';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Registration failed.');
+            }
+        });
+    </script>
+</body>
+</html>
