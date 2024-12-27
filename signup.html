@@ -62,9 +62,6 @@
         .form-section button:hover {
             background-color: #004080;
         }
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -85,22 +82,35 @@
             <input type="text" id="surname" name="surname" required>
 
             <label for="birthday">Birthday (DD.MM.YYYY):</label>
-            <input type="text" id="birthday" name="birthday" pattern="\d{2}\.\d{2}\.\d{4}" required>
+            <input type="text" id="birthday" name="birthday" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Send Verification Code</button>
+            <button type="submit">Register</button>
         </form>
-
-        <form id="verify-form" class="hidden">
-            <label for="verification-code">Verification Code:</label>
-            <input type="text" id="verification-code" name="verification-code" required>
-
-            <button type="submit">Verify & Register</button>
-        </form>
+        <p>Already have an account? <a href="signin.html">Sign in</a></p>
     </section>
 
-    <script src="/backend/server.js"></script>
+    <script>
+        document.getElementById('birthday').addEventListener('blur', function(event) {
+            const input = event.target.value;
+            let formattedDate;
+
+            if (/\d{2}\/\d{2}\/\d{4}/.test(input)) { // Format: MM/DD/YYYY
+                const [month, day, year] = input.split('/');
+                formattedDate = `${day}.${month}.${year}`;
+            } else if (/\d{2}-\d{2}-\d{4}/.test(input)) { // Format: MM-DD-YYYY
+                const [month, day, year] = input.split('-');
+                formattedDate = `${day}.${month}.${year}`;
+            } else {
+                formattedDate = input.replace(/\//g, '.').replace(/-/g, '.');
+            }
+
+            event.target.value = formattedDate;
+        });
+    </script>
+
+    <script src="/signup.js"></script>
 </body>
 </html>
