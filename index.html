@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPN Academy</title>
-    <!-- GOV.UK Frontend -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/style/govspeak.css"> <!-- Typography -->
-    <link rel="stylesheet" href="/style/contextual_sidebar.css"> <!-- Sidebar -->
+    <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
     <!-- Header Section -->
-    <header class="header govspeak">
+    <header class="header">
         <a href="https://cpnacademy.co.uk">CPN Academy</a>
     </header>
 
     <!-- Navigation Bar -->
-    <nav class="nav-bar govspeak" id="nav-bar">
+    <nav class="nav-bar" id="nav-bar">
         <a href="#">Home</a>
         <a href="#courses">Courses</a>
         <a href="#about">About</a>
@@ -27,10 +24,10 @@
     <!-- Main Content Section -->
     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Welcome Section -->
-        <section id="welcome-section" class="govspeak" style="flex: 2; min-width: 300px;">
+        <section id="welcome-section" style="flex: 2; min-width: 300px;">
             <h1>Welcome to CPN Academy</h1>
             <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
-            <a href="signup.html" class="cta-button govspeak">Get Started</a>
+            <a href="signup.html" class="cta-button">Get Started</a>
         </section>
 
         <!-- Sidebar Section -->
@@ -50,7 +47,7 @@
     </div>
 
     <!-- Footer Section -->
-    <footer class="footer govspeak">
+    <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved.</p>
     </footer>
 
@@ -68,11 +65,11 @@
                 welcomeSection.innerHTML = `
                     <h1>Welcome back, ${userEmail}!</h1>
                     <p>Explore your dashboard or continue learning.</p>
-                    <a href="/dashboard.html" class="cta-button govspeak">Go to Dashboard</a>
+                    <a href="/dashboard.html" class="cta-button">Go to Dashboard</a>
                 `;
                 const logoutButton = document.createElement('a');
                 logoutButton.textContent = 'Logout';
-                logoutButton.classList.add('logout-button govspeak');
+                logoutButton.classList.add('logout-button');
                 logoutButton.onclick = () => {
                     localStorage.removeItem('isLoggedIn');
                     localStorage.removeItem('userEmail');
