@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPN Academy</title>
+    <!-- Reference External CSS -->
     <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
@@ -18,19 +19,38 @@
         <a href="#courses">Courses</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="signin.html">Sign In</a>
     </nav>
 
-    <!-- Welcome Section -->
-    <section id="welcome-section">
+    <!-- Hero Section -->
+    <section class="hero-section" id="welcome-section">
         <h1>Welcome to CPN Academy</h1>
         <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
-        <!-- Single "Get Started" Button -->
-        <a href="signup.html" class="cta-button">Get Started</a>
+        <div class="cta-buttons">
+            <a href="signup.html" class="cta-button">Get Started</a>
+            <a href="signin.html" class="cta-button">Sign In</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="feature-card">
+            <h3>Top-notch Courses</h3>
+            <p>Learn from industry experts and advance your skills with our carefully crafted curriculum.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Flexible Learning</h3>
+            <p>Study at your own pace with access to courses 24/7, wherever you are.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Global Community</h3>
+            <p>Join a diverse community of learners and network with professionals worldwide.</p>
+        </div>
     </section>
 
     <!-- Footer Section -->
     <footer class="footer">
-        <p>&copy; 2024 CPN Academy. All rights reserved.</p>
+        <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
     </footer>
 
     <!-- JavaScript -->
@@ -49,7 +69,8 @@
                 `;
                 const logoutButton = document.createElement('a');
                 logoutButton.textContent = 'Logout';
-                logoutButton.classList.add('logout-button');
+                logoutButton.classList.add('cta-button');
+                logoutButton.style.marginLeft = '20px';
                 logoutButton.onclick = () => {
                     localStorage.removeItem('isLoggedIn');
                     localStorage.removeItem('userEmail');
