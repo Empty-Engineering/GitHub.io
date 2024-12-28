@@ -18,14 +18,19 @@ body {
     font-family: "GDS Transport Light", Arial, sans-serif;
     margin: 0;
     padding: 0;
+    line-height: 1.5;
+    text-align: center; /* Center-align main elements */
+}
+
+header, nav, footer {
+    text-align: center;
 }
 
 /* Header */
 .header {
-    background-color: #005ea5; /* GOV.UK primary color */
+    background-color: #005ea5;
     color: white;
     padding: 20px;
-    text-align: center;
 }
 
 .header a {
@@ -37,7 +42,7 @@ body {
 
 /* Navigation Bar */
 .nav-bar {
-    background-color: #f3f2f1; /* Neutral background */
+    background-color: #f3f2f1;
     padding: 10px 20px;
     display: flex;
     justify-content: center;
@@ -45,7 +50,7 @@ body {
 }
 
 .nav-bar a {
-    color: #005ea5; /* GOV.UK blue */
+    color: #005ea5;
     text-decoration: none;
     font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1rem;
@@ -53,9 +58,8 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background-color: #eef5ff; /* Light blue */
+    background-color: #eef5ff;
     padding: 50px 20px;
-    text-align: center;
 }
 
 .hero-section h1 {
@@ -70,7 +74,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Call-to-Action Buttons */
 .cta-buttons {
     display: flex;
     justify-content: center;
@@ -88,15 +91,17 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #004080; /* Darker blue on hover */
+    background-color: #004080;
 }
 
 /* Features Section */
 .features-section {
     display: flex;
     justify-content: space-around;
+    gap: 20px;
     padding: 20px;
     background-color: #ffffff;
+    flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
 .feature-card {
@@ -105,6 +110,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for card effect */
 }
 
 .feature-card h3 {
