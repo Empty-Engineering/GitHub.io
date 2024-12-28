@@ -4,71 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPN Academy</title>
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
+    <style>
+        body {
+            font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #005ea5; /* GOV.UK primary color */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .nav-bar {
+            background-color: #f3f2f1; /* Neutral background */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-bar a {
+            color: #005ea5; /* GOV.UK blue */
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .hero-section {
+            background-color: #eef5ff; /* Light blue */
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .cta-button {
+            background-color: #005ea5;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background-color: #004080;
+        }
+        .features-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        .feature-card {
+            max-width: 300px;
+            background-color: #f3f2f1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 1rem;
+        }
+        .footer {
+            background-color: #0b0c0c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header class="header">
-        <a href="https://cpnacademy.co.uk" class="header-logo">CPN Academy</a>
-        <nav class="header-nav">
-            <a href="signin.html" class="cta-button">Sign In</a>
-            <a href="signup.html" class="cta-button">Sign Up</a>
-        </nav>
+        <a href="https://cpnacademy.co.uk">CPN Academy</a>
     </header>
 
-    <!-- Navigation Bar -->
     <nav class="nav-bar">
         <a href="#">Home</a>
         <a href="#courses">Courses</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="signin.html">Sign In</a>
     </nav>
 
-    <!-- Main Content Section -->
-    <div class="content">
-        <!-- Welcome Section -->
-        <section id="welcome-section">
-            <h1>Welcome to CPN Academy</h1>
-            <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+    <section class="hero-section">
+        <h1>Welcome to CPN Academy</h1>
+        <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+        <a href="https://cpnacademy.co.uk/signup" class="cta-button">Get Started</a>
+        <div class="cta-buttons">
             <a href="signup.html" class="cta-button">Get Started</a>
-        </section>
+            <a href="signin.html" class="cta-button">Sign In</a>
+        </div>
+    </section>
 
-        <!-- Sidebar Section -->
-        <aside class="gem-c-contextual-sidebar">
-            <nav class="gem-c-contextual-sidebar__related-links">
-                <h2 class="gem-c-contextual-sidebar__heading">Quick Links</h2>
-                <ul class="gem-c-contextual-sidebar__list">
-                    <li><a href="/dashboard.html" class="gem-c-contextual-sidebar__text">Dashboard</a></li>
-                    <li><a href="#courses" class="gem-c-contextual-sidebar__text">Explore Courses</a></li>
-                    <li><a href="#support" class="gem-c-contextual-sidebar__text">Support</a></li>
-                </ul>
-            </nav>
-            <a href="#ukraine" class="gem-c-contextual-sidebar__cta">Support for Ukraine</a>
-        </aside>
-    </div>
+    <section class="features-section">
+        <div class="feature-card">
+            <h3>Top-notch Courses</h3>
+            <p>Learn from industry experts and advance your skills with our carefully crafted curriculum.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Flexible Learning</h3>
+            <p>Study at your own pace with access to courses 24/7, wherever you are.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Global Community</h3>
+            <p>Join a diverse community of learners and network with professionals worldwide.</p>
+        </div>
+    </section>
 
-    <!-- Footer Section -->
     <footer class="footer">
-        <p>&copy; 2024 CPN Academy. All rights reserved.</p>
+        <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
     </footer>
-
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            const userEmail = localStorage.getItem('userEmail');
-            const welcomeSection = document.getElementById('welcome-section');
-
-            if (isLoggedIn === 'true') {
-                // Adjust UI for logged-in users
-                welcomeSection.innerHTML = `
-                    <h1>Welcome back, ${userEmail}!</h1>
-                    <p>Explore your dashboard or continue learning.</p>
-                    <a href="/dashboard.html" class="cta-button">Go to Dashboard</a>
-                `;
-            }
-        });
-    </script>
 </body>
 </html>
