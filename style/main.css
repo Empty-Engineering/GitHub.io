@@ -131,3 +131,66 @@ header, nav, footer {
     text-align: center;
     padding: 20px;
 }
+/* Form Section */
+.form-section {
+    padding: 20px;
+    max-width: 500px;
+    margin: 50px auto;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.form-section h2 {
+    text-align: center;
+    font-family: "GDS Transport Bold", Arial, sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.form-section label {
+    display: block;
+    margin: 10px 0 5px;
+    font-family: "GDS Transport Bold", Arial, sans-serif;
+}
+
+.form-section input,
+.form-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-family: "GDS Transport Light", Arial, sans-serif;
+}
+
+.birthday-select {
+    display: flex;
+    gap: 10px;
+}
+
+.cta-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #005ea5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: "GDS Transport Bold", Arial, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #004080;
+}
+
+.cta-link {
+    color: #005ea5;
+    text-decoration: none;
+}
+
+.cta-link:hover {
+    text-decoration: underline;
+}
+
