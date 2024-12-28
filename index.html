@@ -6,12 +6,12 @@
     <title>CPN Academy</title>
     <!-- GOV.UK Frontend -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
-    <!-- Custom Stylesheets -->
-    <link rel="stylesheet" href="/style/govspeak.css">
-    <link rel="stylesheet" href="/style/contextual_sidebar.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/style/govspeak.css"> <!-- Typography -->
+    <link rel="stylesheet" href="/style/contextual_sidebar.css"> <!-- Sidebar -->
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Section -->
     <header class="header govspeak">
         <a href="https://cpnacademy.co.uk">CPN Academy</a>
     </header>
@@ -24,19 +24,17 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Main Content -->
-    <div style="display: flex; justify-content: space-between; padding: 20px;">
+    <!-- Main Content Section -->
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Welcome Section -->
-        <main style="flex: 3; padding-right: 20px;">
-            <section id="welcome-section" class="govspeak">
-                <h1>Welcome to CPN Academy</h1>
-                <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
-                <a href="signup.html" class="cta-button govspeak">Get Started</a>
-            </section>
-        </main>
+        <section id="welcome-section" class="govspeak" style="flex: 2; min-width: 300px;">
+            <h1>Welcome to CPN Academy</h1>
+            <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+            <a href="signup.html" class="cta-button govspeak">Get Started</a>
+        </section>
 
-        <!-- Sidebar -->
-        <aside class="gem-c-contextual-sidebar" style="flex: 1;">
+        <!-- Sidebar Section -->
+        <aside class="gem-c-contextual-sidebar" style="flex: 1; min-width: 250px;">
             <nav class="gem-c-contextual-sidebar__related-links">
                 <h2 class="gem-c-contextual-sidebar__heading">Quick Links</h2>
                 <ul class="gem-c-contextual-sidebar__list">
@@ -51,7 +49,7 @@
         </aside>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer Section -->
     <footer class="footer govspeak">
         <p>&copy; 2024 CPN Academy. All rights reserved.</p>
     </footer>
