@@ -4,72 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - CPN Academy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
-    <link rel="preload" href="https://design-system.service.gov.uk/assets/fonts/light-94a07e06a1-v2.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #005ea5; /* GOV.UK primary color */
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .form-section {
-            padding: 20px;
-            max-width: 500px;
-            margin: 50px auto;
-            border: 1px solid #d8d8d8;
-            border-radius: 10px;
-            background-color: #ffffff;
-        }
-        .form-section h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        .form-section label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-        .form-section select,
-        .form-section input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-        }
-        .form-section button {
-            width: 100%;
-            padding: 10px;
-            background-color: #005ea5;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .form-section button:hover {
-            background-color: #004080;
-        }
-    </style>
+    <!-- External Styles -->
+    <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
+    <!-- Header Section -->
     <header class="header">
-        <a href="https://cpnacademy.co.uk">CPN Academy</a>
+        <a href="https://cpnacademy.co.uk" class="header-logo">CPN Academy</a>
     </header>
 
+    <!-- Form Section -->
     <section class="form-section">
         <h2>Create Your Account</h2>
         <form id="signup-form">
@@ -83,7 +27,7 @@
             <input type="text" id="surname" name="surname" required>
 
             <label for="birthday">Birthday:</label>
-            <div style="display: flex; gap: 5px;">
+            <div class="birthday-select">
                 <select id="day" name="day" required></select>
                 <select id="month" name="month" required></select>
                 <select id="year" name="year" required></select>
@@ -92,11 +36,12 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Register</button>
+            <button type="submit" class="cta-button">Register</button>
         </form>
-        <p>Already have an account? <a href="signin.html">Sign in</a></p>
+        <p>Already have an account? <a href="signin.html" class="cta-link">Sign in</a></p>
     </section>
 
+    <!-- JavaScript -->
     <script>
         // Populate the date dropdowns
         document.addEventListener('DOMContentLoaded', () => {
@@ -149,7 +94,7 @@
             const birthday = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
             const password = document.getElementById('password').value;
 
-            // Submit the form via the updated signup.js
+            // Submit the form via updated signup.js logic
             console.log({ email, forename, surname, birthday, password }); // Debugging
         });
     </script>
