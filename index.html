@@ -4,86 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPN Academy</title>
+    <!-- GOV.UK Frontend -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/govuk-frontend/4.7.0/govuk-frontend.min.css">
-    <style>
-        body {
-            font-family: "GDS Transport", Arial, sans-serif; /* GOV.UK font */
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #005ea5; /* GOV.UK primary color */
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .nav-bar {
-            background-color: #f3f2f1; /* Neutral background */
-            padding: 10px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .nav-bar a {
-            color: #005ea5; /* GOV.UK blue */
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .logout-button {
-            color: #005ea5;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .cta-button {
-            background-color: #005ea5;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        .cta-button:hover {
-            background-color: #004080;
-        }
-        .footer {
-            background-color: #0b0c0c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="/style/govspeak.css">
+    <link rel="stylesheet" href="/style/contextual_sidebar.css">
 </head>
 <body>
-    <header class="header">
+    <!-- Header -->
+    <header class="header govspeak">
         <a href="https://cpnacademy.co.uk">CPN Academy</a>
     </header>
 
-    <nav class="nav-bar" id="nav-bar">
+    <!-- Navigation Bar -->
+    <nav class="nav-bar govspeak" id="nav-bar">
         <a href="#">Home</a>
         <a href="#courses">Courses</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <section id="welcome-section">
-        <h1>Welcome to CPN Academy</h1>
-        <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
-        <a href="signup.html" class="cta-button">Get Started</a>
-    </section>
+    <!-- Main Content -->
+    <div style="display: flex; justify-content: space-between; padding: 20px;">
+        <!-- Welcome Section -->
+        <main style="flex: 3; padding-right: 20px;">
+            <section id="welcome-section" class="govspeak">
+                <h1>Welcome to CPN Academy</h1>
+                <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+                <a href="signup.html" class="cta-button govspeak">Get Started</a>
+            </section>
+        </main>
 
-    <footer class="footer">
+        <!-- Sidebar -->
+        <aside class="gem-c-contextual-sidebar" style="flex: 1;">
+            <nav class="gem-c-contextual-sidebar__related-links">
+                <h2 class="gem-c-contextual-sidebar__heading">Quick Links</h2>
+                <ul class="gem-c-contextual-sidebar__list">
+                    <li><a href="/dashboard.html" class="gem-c-contextual-sidebar__text">Dashboard</a></li>
+                    <li><a href="#courses" class="gem-c-contextual-sidebar__text">Explore Courses</a></li>
+                    <li><a href="#support" class="gem-c-contextual-sidebar__text">Support</a></li>
+                </ul>
+            </nav>
+            <a href="#ukraine" class="gem-c-contextual-sidebar__cta gem-c-contextual-sidebar__cta--ukraine">
+                Support for Ukraine
+            </a>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer govspeak">
         <p>&copy; 2024 CPN Academy. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         // Check login state
         document.addEventListener('DOMContentLoaded', () => {
@@ -93,15 +66,15 @@
             const welcomeSection = document.getElementById('welcome-section');
 
             if (isLoggedIn === 'true') {
-                // User is logged in, adjust UI
+                // Adjust UI for logged-in users
                 welcomeSection.innerHTML = `
                     <h1>Welcome back, ${userEmail}!</h1>
                     <p>Explore your dashboard or continue learning.</p>
-                    <a href="/dashboard.html" class="cta-button">Go to Dashboard</a>
+                    <a href="/dashboard.html" class="cta-button govspeak">Go to Dashboard</a>
                 `;
                 const logoutButton = document.createElement('a');
                 logoutButton.textContent = 'Logout';
-                logoutButton.classList.add('logout-button');
+                logoutButton.classList.add('logout-button govspeak');
                 logoutButton.onclick = () => {
                     localStorage.removeItem('isLoggedIn');
                     localStorage.removeItem('userEmail');
