@@ -44,6 +44,7 @@
             margin: 10px 0 5px;
             font-weight: bold;
         }
+        .form-section select,
         .form-section input {
             width: 100%;
             padding: 10px;
@@ -83,8 +84,26 @@
             <label for="surname">Surname:</label>
             <input type="text" id="surname" name="surname" required>
 
-            <label for="birthday">Birthday (DD.MM.YYYY):</label>
-            <input type="text" id="birthday" name="birthday" required>
+            <label for="birthday">Birthday:</label>
+            <div id="birthday-fields">
+                <select id="day" name="day" required>
+                    <option value="" disabled selected>Day</option>
+                    ${Array.from({ length: 31 }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+                </select>
+                <select id="month" name="month" required>
+                    <option value="" disabled selected>Month</option>
+                    ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        .map((month, index) => `<option value="${index + 1}">${month}</option>`)
+                        .join('')}
+                </select>
+                <select id="year" name="year" required>
+                    <option value="" disabled selected>Year</option>
+                    ${Array.from({ length: 120 }, (_, i) => {
+                        const year = new Date().getFullYear() - i;
+                        return `<option value="${year}">${year}</option>`;
+                    }).join('')}
+                </select>
+            </div>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
@@ -95,24 +114,38 @@
     </section>
 
     <script>
-        document.getElementById('birthday').addEventListener('blur', function(event) {
-            const input = event.target.value;
-            let formattedDate;
+        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-            if (/\d{2}\/\d{2}\/\d{4}/.test(input)) { // Format: MM/DD/YYYY
-                const [month, day, year] = input.split('/');
-                formattedDate = `${day}.${month}.${year}`;
-            } else if (/\d{2}-\d{2}-\d{4}/.test(input)) { // Format: MM-DD-YYYY
-                const [month, day, year] = input.split('-');
-                formattedDate = `${day}.${month}.${year}`;
-            } else {
-                formattedDate = input.replace(/\//g, '.').replace(/-/g, '.');
+            const email = document.getElementById('email').value;
+            const forename = document.getElementById('forename').value;
+            const surname = document.getElementById('surname').value;
+            const day = document.getElementById('day').value;
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+            const password = document.getElementById('password').value;
+
+            const birthday = `${day}.${month}.${year}`;
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, forename, surname, birthday, password }),
+                });
+
+                if (response.ok) {
+                    alert('Registration successful! Redirecting to sign-in page.');
+                    window.location.href = '/signin.html';
+                } else {
+                    const result = await response.json();
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Failed to register. Please try again.');
             }
-
-            event.target.value = formattedDate;
         });
     </script>
-
-    <script src="/signup.js"></script>
 </body>
 </html>
