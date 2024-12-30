@@ -11,7 +11,7 @@ signupForm.addEventListener('submit', async (event) => {
     const password = document.getElementById('password').value;
 
     // Backend API URL
-    const apiUrl = 'https://api.cpnacademy.co.uk';
+    const apiUrl = 'https://api.cpnacademy.co.uk/register';
 
     try {
         // Sending registration data to the backend
