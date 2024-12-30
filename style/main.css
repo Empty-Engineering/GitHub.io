@@ -19,11 +19,6 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.5;
-    text-align: center;
-}
-
-header, nav, footer {
-    text-align: center;
 }
 
 /* Header */
@@ -37,19 +32,20 @@ header, nav, footer {
 }
 
 .header a {
+    display: flex;
+    align-items: center;
     color: white;
     text-decoration: none;
-    font-family: "GDS Transport Bold", Arial, sans-serif;
-    font-size: 1.5rem;
 }
 
 .header-logo {
-    display: inline-block;
-    margin: 0 auto;
+    max-height: 60px;
+    margin-right: 10px;
 }
 
-.site-logo {
-    max-height: 60px;
+.logo-text {
+    font-family: "GDS Transport Bold", Arial, sans-serif;
+    font-size: 1.8rem;
 }
 
 /* Navigation Bar */
@@ -78,6 +74,7 @@ header, nav, footer {
 .hero-section {
     background-color: #eef5ff;
     padding: 50px 20px;
+    text-align: center;
 }
 
 .hero-section h1 {
