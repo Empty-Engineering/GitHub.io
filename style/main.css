@@ -19,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.5;
-    text-align: center; /* Center-align main elements */
+    text-align: center;
 }
 
 header, nav, footer {
@@ -28,6 +28,9 @@ header, nav, footer {
 
 /* Header */
 .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #005ea5;
     color: white;
     padding: 20px;
@@ -38,6 +41,15 @@ header, nav, footer {
     text-decoration: none;
     font-family: "GDS Transport Bold", Arial, sans-serif;
     font-size: 1.5rem;
+}
+
+.header-logo {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.site-logo {
+    max-height: 60px;
 }
 
 /* Navigation Bar */
@@ -54,6 +66,12 @@ header, nav, footer {
     text-decoration: none;
     font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1rem;
+    padding: 5px 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-bar a:hover {
+    color: #004080;
 }
 
 /* Hero Section */
@@ -88,6 +106,7 @@ header, nav, footer {
     border-radius: 5px;
     font-family: "GDS Transport Bold", Arial, sans-serif;
     font-size: 1rem;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .cta-button:hover {
@@ -96,21 +115,20 @@ header, nav, footer {
 
 /* Features Section */
 .features-section {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
     background-color: #ffffff;
-    flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
 .feature-card {
-    max-width: 300px;
+    max-width: 100%;
     background-color: #f3f2f1;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for card effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .feature-card h3 {
@@ -130,7 +148,19 @@ header, nav, footer {
     color: white;
     text-align: center;
     padding: 20px;
+    font-family: "GDS Transport Light", Arial, sans-serif;
+    font-size: 0.9rem;
 }
+
+.footer a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer a:hover {
+    color: #cccccc;
+}
+
 /* Form Section */
 .form-section {
     padding: 20px;
@@ -164,25 +194,16 @@ header, nav, footer {
     font-family: "GDS Transport Light", Arial, sans-serif;
 }
 
+.form-section input:focus,
+.form-section select:focus {
+    outline: 2px solid #005ea5;
+    border-color: #005ea5;
+    box-shadow: 0 0 5px rgba(0, 94, 165, 0.5);
+}
+
 .birthday-select {
     display: flex;
     gap: 10px;
-}
-
-.cta-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #005ea5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-family: "GDS Transport Bold", Arial, sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.cta-button:hover {
-    background-color: #004080;
 }
 
 .cta-link {
@@ -193,4 +214,3 @@ header, nav, footer {
 .cta-link:hover {
     text-decoration: underline;
 }
-
