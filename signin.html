@@ -53,15 +53,13 @@
 
                 if (response.ok) {
                     const result = await response.json();
+
+                    // Store session token securely
+                    document.cookie = `session_token=${result.token}; path=/; Secure; HttpOnly; SameSite=Strict; ${
+                        rememberMe ? 'max-age=604800;' : ''
+                    }`;
+
                     alert('Login successful! Redirecting to your dashboard.');
-
-                    // Save session details
-                    if (rememberMe) {
-                        document.cookie = `user_session=${result.user.email}; path=/; max-age=604800;`; // 7 days
-                    } else {
-                        document.cookie = `user_session=${result.user.email}; path=/;`; // Session cookie
-                    }
-
                     window.location.href = '/dashboard.html';
                 } else {
                     const result = await response.json();
