@@ -82,7 +82,7 @@
 
         // Handle the form submission
         const signupForm = document.getElementById('signup-form');
-        signupForm.addEventListener('submit', (event) => {
+        signupForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const email = document.getElementById('email').value;
@@ -94,8 +94,31 @@
             const birthday = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
             const password = document.getElementById('password').value;
 
-            // Submit the form via updated signup.js logic
-            console.log({ email, forename, surname, birthday, password }); // Debugging
+            // Backend API URL
+            const apiUrl = 'https://api.cpnacademy.co.uk/register';
+
+            try {
+                // Sending data to the backend
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, forename, surname, birthday, password }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Registration successful! Redirecting to sign in.');
+                    window.location.href = '/signin.html';
+                } else {
+                    const result = await response.json();
+                    alert('Error: ' + (result.message || 'An error occurred during registration.'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to connect to the server. Please try again later.');
+            }
         });
     </script>
 </body>
