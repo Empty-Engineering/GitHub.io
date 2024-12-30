@@ -38,7 +38,7 @@
 
             <button type="submit" class="cta-button">Register</button>
         </form>
-        <p>Already have an account? <a href="signin.html" class="cta-link">Sign in</a></p>
+        <p>Already have an account? <a href="login" class="cta-link">Sign in</a></p>
     </section>
 
     <!-- JavaScript -->
@@ -110,7 +110,7 @@
                 if (response.ok) {
                     const result = await response.json();
                     alert('Registration successful! Redirecting to sign in.');
-                    window.location.href = '/signin.html';
+                    window.location.href = '/login';
                 } else {
                     const result = await response.json();
                     alert('Error: ' + (result.message || 'An error occurred during registration.'));
