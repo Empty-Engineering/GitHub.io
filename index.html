@@ -26,10 +26,25 @@
 
     <!-- Navigation Bar -->
     <nav class="nav-bar">
-        <a href="#">Home</a>
-        <a href="#courses">Courses</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a id="home-nav" href="#">Home</a>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    const homeNav = document.getElementById('home-nav');
+
+    // Check if the user is logged in (example: check for a session cookie)
+    const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
+
+    if (isLoggedIn) {
+        homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
+    } else {
+        homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
+    }
+});
+
+        </script>
+        <a href="/browse/courses">Courses</a>
+        <a href="/browse/about">About</a>
+        <a href="/browse/contact">Contact</a>
         <a href="/browse/login">Sign In</a>
     </nav>
 
