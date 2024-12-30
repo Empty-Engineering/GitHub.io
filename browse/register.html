@@ -6,19 +6,28 @@
     <title>Sign Up - CPN Academy</title>
     <!-- External Styles -->
     <link rel="stylesheet" href="/style/main.css">
-<link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
     <style>
         .header-logo {
             height: 80px; /* Adjust the logo height */
             display: block;
             margin: 0 auto; /* Center the logo */
         }
+
+        .form-section {
+            padding: 20px;
+            max-width: 800px; /* Increase maximum width */
+            margin: 50px auto;
+            border: 1px solid #d8d8d8;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
     <header class="header">
-        
         <a href="https://cpnacademy.co.uk">
             <img src="/assets/logo_dark_mode.png" alt="CPN Academy Logo" class="header-logo">
             <span class="logo-text"> Academy</span>
@@ -30,18 +39,17 @@
         <a id="home-nav" href="#">Home</a>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-    const homeNav = document.getElementById('home-nav');
+                const homeNav = document.getElementById('home-nav');
 
-    // Check if the user is logged in (example: check for a session cookie)
-    const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
+                // Check if the user is logged in (example: check for a session cookie)
+                const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
 
-    if (isLoggedIn) {
-        homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
-    } else {
-        homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
-    }
-});
-
+                if (isLoggedIn) {
+                    homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
+                } else {
+                    homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
+                }
+            });
         </script>
         <a href="/browse/courses">Courses</a>
         <a href="/browse/about">About</a>
@@ -157,6 +165,8 @@
             }
         });
     </script>
+
+    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
     </footer>
