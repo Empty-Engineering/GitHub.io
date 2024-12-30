@@ -7,24 +7,56 @@
     <link rel="stylesheet" href="/style/main.css">
     <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
     <style>
-        /* Ensure full screen height */
-        body {
+        /* Navigation Bar */
+        .nav-bar {
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
+            justify-content: center;
+            gap: 20px;
+            background-color: #f3f2f1;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
         }
 
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Centers content vertically if there's extra space */
-            align-items: center; /* Optional for horizontal centering */
+        .nav-bar a {
+            color: #005ea5;
+            text-decoration: none;
+            font-family: "GDS Transport Light", Arial, sans-serif;
+            font-size: 1rem;
+            padding: 5px 10px;
+            transition: color 0.3s ease-in-out;
         }
 
-        .header, .footer {
+        .nav-bar a:hover {
+            color: #004080;
+        }
+
+        /* Features Section */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .feature-card {
+            background-color: #f3f2f1;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            font-family: "GDS Transport Bold", Arial, sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-family: "GDS Transport Light", Arial, sans-serif;
+            font-size: 1rem;
+            color: #333;
         }
     </style>
 </head>
@@ -33,38 +65,51 @@
     <header class="header">
         <a href="https://cpnacademy.co.uk">
             <img src="/assets/logo_dark_mode.png" alt="CPN Academy Logo" class="header-logo">
-            <span class="logo-text">Academy</span>
+            <span class="logo-text"> Academy</span>
         </a>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <h1>Welcome to CPN Academy</h1>
-            <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
-            <div class="cta-buttons">
-                <a href="/browse/register" class="cta-button">Get Started</a>
-                <a href="/browse/login" class="cta-button">Sign In</a>
-            </div>
-        </section>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <a id="home-nav" href="#">Home</a>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const homeNav = document.getElementById('home-nav');
+                const isLoggedIn = document.cookie.includes('user_session'); // Check for login session
+                homeNav.href = isLoggedIn ? '/browse/dashboard' : '/browse/register';
+            });
+        </script>
+        <a href="/browse/courses">Courses</a>
+        <a href="/browse/about">About</a>
+        <a href="/browse/contact">Contact</a>
+        <a href="/browse/login">Sign In</a>
+    </nav>
 
-        <!-- Features Section -->
-        <section class="features-section">
-            <div class="feature-card">
-                <h3>Top-notch Courses</h3>
-                <p>Learn from industry experts and advance your skills with our carefully crafted curriculum.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Flexible Learning</h3>
-                <p>Study at your own pace with access to courses 24/7, wherever you are.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Global Community</h3>
-                <p>Join a diverse community of learners and network with professionals worldwide.</p>
-            </div>
-        </section>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Welcome to CPN Academy</h1>
+        <p>Your gateway to learning and professional growth. Explore a variety of courses tailored to your needs.</p>
+        <div class="cta-buttons">
+            <a href="/browse/register" class="cta-button">Get Started</a>
+            <a href="/browse/login" class="cta-button">Sign In</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="feature-card">
+            <h3>Top-notch Courses</h3>
+            <p>Learn from industry experts and advance your skills with our carefully crafted curriculum.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Flexible Learning</h3>
+            <p>Study at your own pace with access to courses 24/7, wherever you are.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Global Community</h3>
+            <p>Join a diverse community of learners and network with professionals worldwide.</p>
+        </div>
+    </section>
 
     <!-- Footer Section -->
     <footer class="footer">
