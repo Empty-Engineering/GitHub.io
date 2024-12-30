@@ -19,6 +19,13 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 /* Header */
@@ -29,6 +36,7 @@ body {
     background-color: #005ea5;
     color: white;
     padding: 20px;
+    gap: 10px;
 }
 
 .header a {
@@ -38,23 +46,14 @@ body {
     text-decoration: none;
 }
 
-.header-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
 .header-logo {
-    max-height: 60px; /* Adjust size of the logo */
-    margin-right: 10px; /* Add space between the logo and text */
+    max-height: 60px;
 }
 
 .logo-text {
     font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1.5rem;
-    color: white;
 }
-
 
 /* Navigation Bar */
 .nav-bar {
@@ -68,7 +67,6 @@ body {
 .nav-bar a {
     color: #005ea5;
     text-decoration: none;
-    font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1rem;
     padding: 5px 10px;
     transition: color 0.3s ease-in-out;
@@ -92,7 +90,6 @@ body {
 }
 
 .hero-section p {
-    font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
@@ -128,7 +125,6 @@ body {
 }
 
 .feature-card {
-    max-width: 100%;
     background-color: #f3f2f1;
     padding: 20px;
     border-radius: 10px;
@@ -143,7 +139,6 @@ body {
 }
 
 .feature-card p {
-    font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 1rem;
 }
 
@@ -153,7 +148,6 @@ body {
     color: white;
     text-align: center;
     padding: 20px;
-    font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 0.9rem;
 }
 
@@ -178,7 +172,6 @@ body {
 
 .form-section h2 {
     text-align: center;
-    font-family: "GDS Transport Bold", Arial, sans-serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -186,7 +179,6 @@ body {
 .form-section label {
     display: block;
     margin: 10px 0 5px;
-    font-family: "GDS Transport Bold", Arial, sans-serif;
 }
 
 .form-section input,
@@ -196,7 +188,6 @@ body {
     margin-bottom: 15px;
     border: 1px solid #cccccc;
     border-radius: 5px;
-    font-family: "GDS Transport Light", Arial, sans-serif;
 }
 
 .form-section input:focus,
