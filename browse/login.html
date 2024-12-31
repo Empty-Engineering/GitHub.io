@@ -37,14 +37,14 @@
 
         .form-section input[type="email"],
         .form-section input[type="password"] {
-            width: 100%;          /* Make the input fill the width of its container */
-            padding: 10px;        /* Some internal padding so text isn't at the edge */
-            box-sizing: border-box; /* Ensure width includes padding & border */
-            margin-bottom: 10px;  /* Space below each field */
+            width: 100%;          
+            padding: 10px;        
+            box-sizing: border-box; 
+            margin-bottom: 10px;  
         }
 
         .checkbox-wrapper {
-            margin: 15px 0; /* Space above/below the checkbox row */
+            margin: 15px 0; 
         }
 
         .inline-label {
@@ -67,9 +67,8 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const homeNav = document.getElementById('home-nav');
-
                 // Check if the user is logged in (example: check for a session cookie)
-                const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
+                const isLoggedIn = document.cookie.includes('session_token'); // Replace with your actual login mechanism
 
                 if (isLoggedIn) {
                     homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
@@ -114,6 +113,7 @@
             const rememberMe = document.getElementById('remember-me').checked;
 
             try {
+                // Send credentials to the login endpoint
                 const response = await fetch('https://api.cpnacademy.co.uk/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -122,11 +122,18 @@
 
                 if (response.ok) {
                     const result = await response.json();
+                    
+                    // The server should return: { message: 'Login successful!', token: <JWT> }
 
-                    // Store session token securely
-                    document.cookie = `session_token=${result.token}; path=/; Secure; HttpOnly; SameSite=Strict; ${
+                    // Store the token in a secure cookie
+                    // Note: 'HttpOnly' cannot be set from JS, only from server side,
+                    // so if you need client-side reading, remove HttpOnly from server response
+                    document.cookie = `session_token=${result.token}; path=/; Secure; SameSite=Strict; ${
                         rememberMe ? 'max-age=604800;' : ''
                     }`;
+
+                    // Alternatively, if you want to store in localStorage:
+                    // localStorage.setItem('session_token', result.token);
 
                     alert('Login successful! Redirecting to your dashboard.');
                     window.location.href = '/browse/dashboard.html';
