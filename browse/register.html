@@ -14,14 +14,24 @@
             margin: 0 auto; /* Center the logo */
         }
 
+        /* Updated form section styling */
         .form-section {
+            width: 80%;              /* Use 80% of the available width */
+            max-width: 1000px;       /* Cap the maximum width for large screens */
+            margin: 50px auto;       /* Center horizontally with auto left/right margin */
             padding: 20px;
-            max-width: 800px; /* Increase maximum width */
-            margin: 50px auto;
             border: 1px solid #d8d8d8;
             border-radius: 10px;
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        /* Make it more responsive for smaller screens */
+        @media (max-width: 768px) {
+            .form-section {
+                width: 90%;          /* Slightly narrower margin on smaller devices */
+                margin: 30px auto;
+            }
         }
     </style>
 </head>
@@ -152,7 +162,6 @@
                 });
 
                 if (response.ok) {
-                    const result = await response.json();
                     alert('Registration successful! Redirecting to sign in.');
                     window.location.href = '/login';
                 } else {
