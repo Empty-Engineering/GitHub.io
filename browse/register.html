@@ -19,11 +19,37 @@
             width: 80%;              /* Use 80% of the available width */
             max-width: 1000px;       /* Cap the maximum width for large screens */
             margin: 50px auto;       /* Center horizontally with auto left/right margin */
-            padding: 20px;
+            padding: 20px;           /* Internal padding so items aren't flush against the boundary */
             border: 1px solid #d8d8d8;
             border-radius: 10px;
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            box-sizing: border-box;  /* Ensures padding is included in total width calculation */
+        }
+
+        /* Ensure labels stack and have some spacing */
+        .form-section label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        /* Inputs get padding & full width minus container padding */
+        .form-section input[type="email"],
+        .form-section input[type="text"],
+        .form-section input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Birthday selects get spacing too */
+        .birthday-select select {
+            padding: 8px;
+            margin-right: 5px;
+            margin-bottom: 10px; /* Slight spacing below for consistency */
+            box-sizing: border-box;
         }
 
         /* Make it more responsive for smaller screens */
@@ -145,7 +171,7 @@
             const day = document.getElementById('day').value;
             const month = document.getElementById('month').value;
             const year = document.getElementById('year').value;
-            const birthday = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            const birthday = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const password = document.getElementById('password').value;
 
             // Backend API URL
