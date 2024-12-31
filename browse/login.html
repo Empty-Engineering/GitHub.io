@@ -67,8 +67,9 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const homeNav = document.getElementById('home-nav');
-                // Check if the user is logged in (example: check for a session cookie)
-                const isLoggedIn = document.cookie.includes('session_token'); // Replace with your actual login mechanism
+                // Check if the user is logged in by checking the presence of a token
+                const token = document.cookie.split('; ').find(row => row.startsWith('session_token='));
+                const isLoggedIn = token !== undefined;
 
                 if (isLoggedIn) {
                     homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
@@ -123,17 +124,10 @@
                 if (response.ok) {
                     const result = await response.json();
                     
-                    // The server should return: { message: 'Login successful!', token: <JWT> }
-
                     // Store the token in a secure cookie
-                    // Note: 'HttpOnly' cannot be set from JS, only from server side,
-                    // so if you need client-side reading, remove HttpOnly from server response
                     document.cookie = `session_token=${result.token}; path=/; Secure; SameSite=Strict; ${
                         rememberMe ? 'max-age=604800;' : ''
                     }`;
-
-                    // Alternatively, if you want to store in localStorage:
-                    // localStorage.setItem('session_token', result.token);
 
                     alert('Login successful! Redirecting to your dashboard.');
                     window.location.href = '/browse/dashboard.html';
