@@ -12,14 +12,16 @@
     font-weight: 300;
     font-style: normal;
 }
+
+/* Utility/Helper Classes */
 .page-filler {
     min-height: 100vh; /* Takes up at least the full viewport height */
-    display: flex;
+    display: flex;           /* Enables flexible layout */
     justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
+    align-items: center;     /* Centers content vertically */
     background-color: #eef5ff; /* Optional background color */
-    padding: 20px; /* Optional padding */
-    box-sizing: border-box; /* Ensures padding is included in height calculation */
+    padding: 20px;           /* Optional padding */
+    box-sizing: border-box;   /* Ensures padding is included in height calculation */
 }
 
 /* General Styles */
@@ -152,7 +154,6 @@ main {
 }
 
 /* Footer */
-/* Ensure the footer spans the full width */
 .footer {
     width: 100%;
     background-color: #0b0c0c;
@@ -162,9 +163,8 @@ main {
     font-family: "GDS Transport Light", Arial, sans-serif;
     font-size: 0.9rem;
     box-sizing: border-box; /* Include padding and border in width calculation */
-    position: relative; /* Ensures it stays relative to page content */
+    position: relative;     /* Ensures it stays relative to page content */
 }
-
 
 .footer a {
     color: #ffffff;
