@@ -5,21 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Under Construction - CPN Academy</title>
+    <!-- Link to your main stylesheet (which now contains .page-filler) -->
     <link rel="stylesheet" href="/style/main.css">
+
+    <!-- Optional inline style overrides or additions -->
     <style>
+        /* Remove flex and alignment from body if you're relying on .page-filler instead */
         body {
-            font-family: "GDS Transport Light", Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: "GDS Transport Light", Arial, sans-serif;
             background-color: #f3f2f1;
-            text-align: center;
+            /* No need for display: flex or min-height here if .page-filler is handling it */
         }
 
+        /* Example .page-filler class (if not already placed in /style/main.css) */
+        .page-filler {
+            min-height: 100vh;         /* Takes up at least the full viewport height */
+            display: flex;            /* Enables flex layout */
+            flex-direction: column;   /* Stacks content vertically */
+            justify-content: center;  /* Centers content vertically */
+            align-items: center;      /* Centers content horizontally */
+            box-sizing: border-box;    /* Include padding in total height */
+        }
+
+        /* Header */
         header {
             background-color: #005ea5;
             color: white;
@@ -27,7 +37,6 @@
             padding: 20px;
             text-align: center;
         }
-
         header a {
             color: white;
             text-decoration: none;
@@ -35,6 +44,26 @@
             font-size: 1.5rem;
         }
 
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: #f3f2f1;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-bar a {
+            color: #005ea5;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 5px 10px;
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-bar a:hover {
+            color: #004080;
+        }
+
+        /* Content Box */
         .content {
             max-width: 600px;
             padding: 20px;
@@ -42,18 +71,18 @@
             border: 1px solid #cccccc;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text if desired */
         }
-
         .content h1 {
             font-size: 2rem;
             color: #005ea5;
         }
-
         .content p {
             font-size: 1.2rem;
             margin: 20px 0;
         }
 
+        /* CTA Button */
         .cta-button {
             display: inline-block;
             background-color: #005ea5;
@@ -64,15 +93,31 @@
             font-family: "GDS Transport Bold", Arial, sans-serif;
             font-size: 1rem;
         }
-
         .cta-button:hover {
             background-color: #004080;
         }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 20px;
+            background-color: #0b0c0c;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer a:hover {
+            color: #cccccc;
+        }
     </style>
 </head>
+
 <body>
     <header class="header">
-        
         <a href="/index">
             <img src="/assets/logo_dark_mode.png" alt="CPN Academy Logo" class="header-logo">
             <span class="logo-text"> Academy</span>
@@ -84,18 +129,16 @@
         <a id="home-nav" href="#">Home</a>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-    const homeNav = document.getElementById('home-nav');
+                const homeNav = document.getElementById('home-nav');
+                // Check if the user is logged in (example: check for a session cookie)
+                const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
 
-    // Check if the user is logged in (example: check for a session cookie)
-    const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
-
-    if (isLoggedIn) {
-        homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
-    } else {
-        homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
-    }
-});
-
+                if (isLoggedIn) {
+                    homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
+                } else {
+                    homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
+                }
+            });
         </script>
         <a href="/browse/courses">Courses</a>
         <a href="/browse/about">About</a>
@@ -103,43 +146,19 @@
         <a href="/browse/login">Sign In</a>
     </nav>
 
-    <div class="content">
-        <h1>Under Construction</h1>
-        <p>This page is currently under construction. Please check back soon!</p>
-        <a href="/" class="cta-button">Go to Homepage</a>
+    <!-- Page-Filler Section -->
+    <div class="page-filler">
+        <div class="content">
+            <h1>Under Construction</h1>
+            <p>This page is currently under construction. Please check back soon!</p>
+            <a href="/" class="cta-button">Go to Homepage</a>
+        </div>
     </div>
-    <script>
-        function addEmptyLinesToFillSpace(containerId) {
-            const container = document.getElementById(containerId);
-            const viewportHeight = window.innerHeight;
-            const containerHeight = container.offsetHeight;
-
-            // Calculate the number of lines needed (approximation based on font size)
-            const lineHeight = parseFloat(getComputedStyle(container).lineHeight) || 16;
-            const linesNeeded = Math.ceil((viewportHeight - containerHeight) / lineHeight);
-
-            // Add <br> elements to the container
-            for (let i = 0; i < linesNeeded; i++) {
-                const br = document.createElement('br');
-                container.appendChild(br);
-            }
-        }
-
-        // Run on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            addEmptyLinesToFillSpace('fillerContainer');
-        });
-
-        // Recalculate on window resize
-        window.addEventListener('resize', () => {
-            const container = document.getElementById('fillerContainer');
-            container.innerHTML = '<p>Content here...</p>'; // Reset container content
-            addEmptyLinesToFillSpace('fillerContainer');
-        });
-    </script>
 
     <footer class="footer">
-        <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
+        <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. 
+           Scottish Registration: SC828012. VAT Registration: 479640937.
+        </p>
     </footer>
 </body>
 </html>
