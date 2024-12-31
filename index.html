@@ -7,29 +7,6 @@
     <link rel="stylesheet" href="/style/main.css">
     <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
     <style>
-        /* Navigation Bar */
-        .nav-bar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background-color: #f3f2f1;
-            padding: 10px 20px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .nav-bar a {
-            color: #005ea5;
-            text-decoration: none;
-            font-family: "GDS Transport Light", Arial, sans-serif;
-            font-size: 1rem;
-            padding: 5px 10px;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .nav-bar a:hover {
-            color: #004080;
-        }
-
         /* Features Section */
         .features-section {
             display: grid;
@@ -69,21 +46,8 @@
         </a>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-        <a id="home-nav" href="#">Home</a>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const homeNav = document.getElementById('home-nav');
-                const isLoggedIn = document.cookie.includes('user_session'); // Check for login session
-                homeNav.href = isLoggedIn ? '/browse/dashboard' : '/browse/register';
-            });
-        </script>
-        <a href="/browse/courses">Courses</a>
-        <a href="/browse/about">About</a>
-        <a href="/browse/contact">Contact</a>
-        <a href="/browse/login">Sign In</a>
-    </nav>
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -115,5 +79,33 @@
     <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
     </footer>
+
+    <!-- JavaScript to Load Navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbarPlaceholder = document.getElementById('navbar-placeholder');
+            if (navbarPlaceholder) {
+                fetch('/assets/elements/navbar.html')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to load navbar.');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        navbarPlaceholder.innerHTML = data;
+
+                        // Optional: Modify navbar links based on session validation
+                        const homeNav = document.getElementById('home-nav');
+                        if (document.cookie.includes('session_token')) {
+                            homeNav.href = '/browse/dashboard';
+                        } else {
+                            homeNav.href = '/browse/register';
+                        }
+                    })
+                    .catch(error => console.error('Error loading navbar:', error));
+            }
+        });
+    </script>
 </body>
 </html>
