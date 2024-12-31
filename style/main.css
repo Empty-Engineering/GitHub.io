@@ -13,30 +13,42 @@
     font-style: normal;
 }
 
-/* Utility/Helper Classes */
-.page-filler {
-    min-height: 100vh; /* Takes up at least the full viewport height */
-    display: flex;           /* Enables flexible layout */
-    justify-content: center; /* Centers content horizontally */
-    align-items: center;     /* Centers content vertically */
-    background-color: #eef5ff; /* Optional background color */
-    padding: 20px;           /* Optional padding */
-    box-sizing: border-box;   /* Ensures padding is included in height calculation */
-}
+/* 
+  1) Ensure html and body have no default margin/padding.
+  2) Body is set to flex and min-height: 100vh to fill the screen.
+  3) main gets flex: 1 so it expands to push the footer down if content is short.
+*/
 
-/* General Styles */
-body {
-    font-family: "GDS Transport Light", Arial, sans-serif;
+html, body {
     margin: 0;
     padding: 0;
-    line-height: 1.5;
+}
+
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: "GDS Transport Light", Arial, sans-serif;
+    line-height: 1.5;
 }
 
+/* By giving main 'flex: 1', it takes remaining vertical space. */
 main {
     flex: 1;
+}
+
+/* 
+  The .page-filler class is optional for sections/pages that need 
+  centered content or an additional full-height container.
+*/
+.page-filler {
+    min-height: 100vh;           /* Takes up at least the full viewport height */
+    display: flex;               /* Enables flexible layout */
+    justify-content: center;     /* Centers content horizontally */
+    align-items: center;         /* Centers content vertically */
+    background-color: #eef5ff;   /* Optional background color */
+    padding: 20px;               /* Optional padding */
+    box-sizing: border-box;       /* Ensures padding is included in height calculation */
 }
 
 /* Header */
