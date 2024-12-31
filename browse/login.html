@@ -12,17 +12,16 @@
 
     <style>
         .header-logo {
-            height: 80px; /* Adjust the logo height */
+            height: 80px;
             display: block;
-            margin: 0 auto; /* Center the logo */
+            margin: 0 auto;
         }
 
-        /* Form Section Styling */
         .form-section {
-            width: 80%;               /* Use 80% of the available width */
-            max-width: 600px;         /* Cap how wide it can grow for large screens */
-            margin: 50px auto;        /* Center horizontally with auto margins */
-            padding: 20px;            /* Space inside the form boundary */
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
             background-color: #ffffff;
             border: 1px solid #d8d8d8;
             border-radius: 10px;
@@ -31,7 +30,7 @@
 
         .form-section label {
             display: block;
-            margin-top: 15px; /* Separate label from previous element */
+            margin-top: 15px;
             margin-bottom: 5px;
         }
 
@@ -67,15 +66,8 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const homeNav = document.getElementById('home-nav');
-                // Check if the user is logged in by checking the presence of a token
-                const token = document.cookie.split('; ').find(row => row.startsWith('session_token='));
-                const isLoggedIn = token !== undefined;
-
-                if (isLoggedIn) {
-                    homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
-                } else {
-                    homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
-                }
+                const isLoggedIn = document.cookie.includes('session_token');
+                homeNav.href = isLoggedIn ? '/browse/dashboard' : '/browse/register';
             });
         </script>
         <a href="/browse/courses">Courses</a>
@@ -106,6 +98,14 @@
 
     <!-- JavaScript -->
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userDataCookie = document.cookie.split('; ').find(row => row.startsWith('user_data='));
+            if (userDataCookie) {
+                const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
+                alert(`Welcome back, ${userData.forename} ${userData.surname}!`);
+            }
+        });
+
         document.getElementById('login-form').addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -114,7 +114,6 @@
             const rememberMe = document.getElementById('remember-me').checked;
 
             try {
-                // Send credentials to the login endpoint
                 const response = await fetch('https://api.cpnacademy.co.uk/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -124,11 +123,6 @@
                 if (response.ok) {
                     const result = await response.json();
                     
-                    // Store the token in a secure cookie
-                    document.cookie = `session_token=${result.token}; path=/; Secure; SameSite=Strict; ${
-                        rememberMe ? 'max-age=604800;' : ''
-                    }`;
-
                     alert('Login successful! Redirecting to your dashboard.');
                     window.location.href = '/browse/dashboard.html';
                 } else {
