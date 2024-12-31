@@ -1,0 +1,46 @@
+<nav class="nav-bar">
+    <a id="home-nav" href="#">Home</a>
+    <a href="/browse/courses">Courses</a>
+    <a href="/browse/about">About</a>
+    <a href="/browse/contact">Contact</a>
+    <a id="login-nav" href="/browse/login">Sign In</a>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const homeNav = document.getElementById('home-nav');
+        const loginNav = document.getElementById('login-nav');
+
+        // Get the session token from cookies
+        const token = document.cookie.split('; ').find(row => row.startsWith('session_token='));
+
+        if (token) {
+            const sessionToken = token.split('=')[1];
+
+            try {
+                // Validate the session token with the backend
+                const response = await fetch('https://api.cpnacademy.co.uk/validate-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${sessionToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    // Token is valid, redirect to dashboard
+                    homeNav.href = '/browse/dashboard';
+                    loginNav.style.display = 'none'; // Hide "Sign In" link if logged in
+                } else {
+                    // Token is invalid or expired
+                    console.warn('Session validation failed.');
+                    document.cookie = 'session_token=; Max-Age=0; path=/'; // Clear the token
+                }
+            } catch (err) {
+                console.error('Error validating session token:', err);
+            }
+        } else {
+            // No token present
+            homeNav.href = '/browse/register';
+        }
+    });
+</script>
