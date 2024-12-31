@@ -108,9 +108,35 @@
         <p>This page is currently under construction. Please check back soon!</p>
         <a href="/" class="cta-button">Go to Homepage</a>
     </div>
-    <div class="page-filler">
-    <p>This content is centred and takes up the entire viewport height at minimum.</p>
-</div>
+    <script>
+        function addEmptyLinesToFillSpace(containerId) {
+            const container = document.getElementById(containerId);
+            const viewportHeight = window.innerHeight;
+            const containerHeight = container.offsetHeight;
+
+            // Calculate the number of lines needed (approximation based on font size)
+            const lineHeight = parseFloat(getComputedStyle(container).lineHeight) || 16;
+            const linesNeeded = Math.ceil((viewportHeight - containerHeight) / lineHeight);
+
+            // Add <br> elements to the container
+            for (let i = 0; i < linesNeeded; i++) {
+                const br = document.createElement('br');
+                container.appendChild(br);
+            }
+        }
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addEmptyLinesToFillSpace('fillerContainer');
+        });
+
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('fillerContainer');
+            container.innerHTML = '<p>Content here...</p>'; // Reset container content
+            addEmptyLinesToFillSpace('fillerContainer');
+        });
+    </script>
 
     <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
