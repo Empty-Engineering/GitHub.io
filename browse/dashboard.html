@@ -1,91 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Construction - CPN Academy</title>
-    <!-- Link to your main stylesheet (which now contains .page-filler) -->
+    <title>Dashboard - CPN Academy</title>
     <link rel="stylesheet" href="/style/main.css">
-
-    <!-- Optional inline style overrides or additions -->
+    <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
     <style>
-        /* Remove flex and alignment from body if you're relying on .page-filler instead */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "GDS Transport Light", Arial, sans-serif;
-            background-color: #f3f2f1;
-            /* No need for display: flex or min-height here if .page-filler is handling it */
-        }
-
-        /* Example .page-filler class (if not already placed in /style/main.css) */
-        .page-filler {
-            min-height: 100vh;         /* Takes up at least the full viewport height */
-            display: flex;            /* Enables flex layout */
-            flex-direction: column;   /* Stacks content vertically */
-            justify-content: center;  /* Centers content vertically */
-            align-items: center;      /* Centers content horizontally */
-            box-sizing: border-box;    /* Include padding in total height */
-        }
-
-        /* Header */
-        header {
-            background-color: #005ea5;
-            color: white;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            font-family: "GDS Transport Bold", Arial, sans-serif;
-            font-size: 1.5rem;
-        }
-
-        /* Navigation Bar */
-        .nav-bar {
-            background-color: #f3f2f1;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .nav-bar a {
-            color: #005ea5;
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 5px 10px;
-            transition: color 0.3s ease-in-out;
-        }
-        .nav-bar a:hover {
-            color: #004080;
-        }
-
-        /* Content Box */
-        .content {
-            max-width: 600px;
+        .dashboard-container {
+            max-width: 800px;
+            margin: 50px auto;
             padding: 20px;
             background-color: #ffffff;
-            border: 1px solid #cccccc;
+            border: 1px solid #d8d8d8;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Center text if desired */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .content h1 {
-            font-size: 2rem;
+
+        .welcome-message {
+            font-family: "GDS Transport Bold", Arial, sans-serif;
+            font-size: 1.5rem;
             color: #005ea5;
+            margin-bottom: 20px;
         }
-        .content p {
+
+        .placeholder-message {
+            font-family: "GDS Transport Light", Arial, sans-serif;
             font-size: 1.2rem;
+            color: #333;
             margin: 20px 0;
         }
 
-        /* CTA Button */
-        .cta-button {
+        .logout-button {
             display: inline-block;
-            background-color: #005ea5;
+            background-color: #d9534f;
             color: white;
             text-decoration: none;
             padding: 10px 20px;
@@ -93,30 +42,14 @@
             font-family: "GDS Transport Bold", Arial, sans-serif;
             font-size: 1rem;
         }
-        .cta-button:hover {
-            background-color: #004080;
-        }
 
-        /* Footer */
-        .footer {
-            width: 100%;
-            padding: 20px;
-            background-color: #0b0c0c;
-            color: white;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        .footer a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .footer a:hover {
-            color: #cccccc;
+        .logout-button:hover {
+            background-color: #c9302c;
         }
     </style>
 </head>
-
 <body>
+    <!-- Header Section -->
     <header class="header">
         <a href="/index">
             <img src="/assets/logo_dark_mode.png" alt="CPN Academy Logo" class="header-logo">
@@ -124,41 +57,57 @@
         </a>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-        <a id="home-nav" href="#">Home</a>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const homeNav = document.getElementById('home-nav');
-                // Check if the user is logged in (example: check for a session cookie)
-                const isLoggedIn = document.cookie.includes('user_session'); // Replace with your actual login mechanism
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
-                if (isLoggedIn) {
-                    homeNav.href = '/browse/dashboard'; // Redirect to the dashboard if logged in
-                } else {
-                    homeNav.href = '/browse/register'; // Redirect to sign-up if not logged in
-                }
-            });
-        </script>
-        <a href="/browse/courses">Courses</a>
-        <a href="/browse/about">About</a>
-        <a href="/browse/contact">Contact</a>
-        <a href="/browse/login">Sign In</a>
-    </nav>
-
-    <!-- Page-Filler Section -->
-    <div class="page-filler">
-        <div class="content">
-            <h1>Under Construction</h1>
-            <p>This page is currently under construction. Please check back soon!</p>
-            <a href="/" class="cta-button">Go to Homepage</a>
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div id="welcome-message" class="welcome-message"></div>
+        <div class="placeholder-message">
+            Courses are coming soon! Stay tuned for updates.
         </div>
+        <a href="/browse/login" id="logout-button" class="logout-button">Logout</a>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. 
            Scottish Registration: SC828012. VAT Registration: 479640937.
         </p>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load the navbar
+            const navbarPlaceholder = document.getElementById('navbar-placeholder');
+            fetch('/assets/elements/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    navbarPlaceholder.innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+
+            // Fetch user data from cookies
+            const userCookie = document.cookie.split('; ').find(row => row.startsWith('user_data='));
+            if (userCookie) {
+                const user = JSON.parse(decodeURIComponent(userCookie.split('=')[1]));
+                document.getElementById('welcome-message').textContent = `Welcome, ${user.forename} ${user.surname}!`;
+            } else {
+                // Redirect to login if no user_data cookie
+                alert('Session expired. Please log in again.');
+                window.location.href = '/browse/login';
+            }
+
+            // Logout functionality
+            document.getElementById('logout-button').addEventListener('click', () => {
+                // Clear cookies
+                document.cookie = 'session_token=; Max-Age=0; path=/;';
+                document.cookie = 'user_data=; Max-Age=0; path=/;';
+                alert('You have been logged out.');
+                window.location.href = '/browse/login';
+            });
+        });
+    </script>
 </body>
 </html>
