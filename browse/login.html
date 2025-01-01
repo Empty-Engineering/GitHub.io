@@ -80,40 +80,39 @@
         </form>
         <p>Don't have an account? <a href="register" class="cta-link">Sign up</a></p>
     </section>
-<script>
-        document.getElementById('login-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('remember-me').checked;
+        <script>
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-            try {
-                const response = await fetch('https://api.cpnacademy.co.uk/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password }),
-                });
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-                if (response.ok) {
-                    const result = await response.json();
+        try {
+            const response = await fetch('https://api.cpnacademy.co.uk/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
 
-                    // Store session token securely
-                    document.cookie = `session_token=${result.token}; path=/; Secure; HttpOnly; SameSite=Strict; ${
-                        rememberMe ? 'max-age=604800;' : ''
-                    }`;
+            if (response.ok) {
+                const result = await response.json();
 
-                    alert('Login successful! Redirecting to your dashboard.');
-                    window.location.href = '/dashboard.html';
-                } else {
-                    const result = await response.json();
-                    alert('Error: ' + result.message);
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Failed to sign in. Please try again.');
+                // Store the token in cookies
+                document.cookie = `session_token=${result.token}; path=/; secure; samesite=strict; max-age=${7 * 24 * 60 * 60}`;
+
+                alert('Login successful! Redirecting to your dashboard.');
+                window.location.href = '/dashboard.html';
+            } else {
+                const result = await response.json();
+                alert('Error: ' + result.message);
             }
-        });
+        } catch (error) {
+            console.error('Login request failed:', error);
+            alert('Failed to sign in. Please try again.');
+        }
+    });
+
     </script>
     <!-- JavaScript -->
    <!--<script src="/scripts/login.js"></script> Linking the new JS file -->
