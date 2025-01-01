@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         // Get form values
-        const email = document.getElementById('email').value;
-        const forename = document.getElementById('forename').value;
-        const surname = document.getElementById('surname').value;
+        const email = document.getElementById('email').value.trim();
+        const forename = document.getElementById('forename').value.trim();
+        const surname = document.getElementById('surname').value.trim();
         const day = document.getElementById('day').value;
         const month = document.getElementById('month').value;
         const year = document.getElementById('year').value;
-        const password = document.getElementById('password').value;
+        const password = document.getElementById('password').value.trim();
 
         // Validate input
         if (!email || !forename || !surname || !day || !month || !year || !password) {
@@ -86,8 +86,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Registration successful! Redirecting to sign in.');
                 window.location.href = '/browse/login.html';
             } else {
-                const result = await response.json();
-                alert('Error: ' + (result.message || 'An error occurred during registration.'));
+                const text = await response.text();
+                console.error('Raw response:', text);
+
+                // Attempt to parse JSON error
+                try {
+                    const result = JSON.parse(text);
+                    alert('Error: ' + (result.message || 'An error occurred during registration.'));
+                } catch (parseError) {
+                    console.error('Failed to parse JSON:', parseError);
+                    alert('Error: Unexpected response format from the server.');
+                }
             }
         } catch (error) {
             console.error('Error:', error);
