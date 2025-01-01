@@ -78,7 +78,7 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             // Load the navbar
             const navbarPlaceholder = document.getElementById('navbar-placeholder');
             fetch('/assets/elements/navbar.html')
@@ -88,22 +88,32 @@
                 })
                 .catch(error => console.error('Error loading navbar:', error));
 
-            // Fetch user data from cookies
-            const userCookie = document.cookie.split('; ').find(row => row.startsWith('user_data='));
-            if (userCookie) {
-                const user = JSON.parse(decodeURIComponent(userCookie.split('=')[1]));
-                document.getElementById('welcome-message').textContent = `Welcome, ${user.forename} ${user.surname}!`;
-            } else {
-                // Redirect to login if no user_data cookie
-                alert('Session expired. Please log in again.');
+            // Fetch user session details using the session token
+            try {
+                const response = await fetch('https://api.cpnacademy.co.uk/validate-session', {
+                    method: 'POST',
+                    credentials: 'include', // Include cookies in the request
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const user = data.user;
+                    document.getElementById('welcome-message').textContent = `Welcome, ${user.forename} ${user.surname}!`;
+                } else {
+                    console.error('Session validation failed. Redirecting to login.');
+                    alert('Session expired. Please log in again.');
+                    window.location.href = '/browse/login';
+                }
+            } catch (error) {
+                console.error('Error validating session:', error);
+                alert('Failed to validate session. Please log in again.');
                 window.location.href = '/browse/login';
             }
 
             // Logout functionality
             document.getElementById('logout-button').addEventListener('click', () => {
-                // Clear cookies
+                // Clear cookies on logout
                 document.cookie = 'session_token=; Max-Age=0; path=/;';
-                document.cookie = 'user_data=; Max-Age=0; path=/;';
                 alert('You have been logged out.');
                 window.location.href = '/browse/login';
             });
