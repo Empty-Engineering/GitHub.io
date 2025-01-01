@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include', // Include cookies in the request
             });
 
             console.log('Fetch response:', response);
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 console.log('Fetch result:', result);
 
-                // Ensure `session_token` exists in localStorage
+                // Ensure `session_token` exists in the response
                 const sessionToken = result.token;
                 if (sessionToken) {
                     console.log('Session Token:', sessionToken);
