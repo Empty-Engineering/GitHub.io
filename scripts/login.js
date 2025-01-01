@@ -37,19 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 console.log('Fetch result:', result);
 
-                // Debug cookies
-                const allCookies = document.cookie.split('; ');
-                console.log('Cookies after login:', allCookies);
-
-                // Ensure `session_token` exists
-                const sessionToken = allCookies.find(row => row.startsWith('session_token='));
+                // Ensure `session_token` exists in localStorage
+                const sessionToken = result.token;
                 if (sessionToken) {
-                    console.log('Session Token:', sessionToken.split('=')[1]);
+                    console.log('Session Token:', sessionToken);
+                    // Store the session token in localStorage
+                    localStorage.setItem('session_token', sessionToken);
                     alert('Login successful! Redirecting to your dashboard.');
                     window.location.href = '/browse/dashboard.html';
                 } else {
-                    console.error('Session token not found in cookies.');
-                    alert('Failed to log in. No session token found.');
+                    console.error('Session token not returned from API.');
+                    alert('Failed to log in. No session token provided.');
                 }
             } else {
                 const result = await response.json();
@@ -62,14 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Check cookies on page load
-    const allCookies = document.cookie.split('; ');
-    console.log('Current cookies:', allCookies);
-
-    const sessionToken = allCookies.find(row => row.startsWith('session_token='));
+    // Check localStorage on page load
+    const sessionToken = localStorage.getItem('session_token');
     if (sessionToken) {
-        console.log('Session Token:', sessionToken.split('=')[1]);
+        console.log('Session Token from localStorage:', sessionToken);
     } else {
-        console.log('No session token found.');
+        console.log('No session token found in localStorage.');
     }
 });
