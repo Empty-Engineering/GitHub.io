@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed.');
-//Lovely jubbly--sound as a pound
+    // Lovely jubbly -- sound as a pound
+
     // Get the login form
     const form = document.getElementById('login-form');
     if (!form) {
@@ -43,23 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ensure `session_token` exists
                 const sessionToken = allCookies.find(row => row.startsWith('session_token='));
                 if (sessionToken) {
-                    console.log('Session Token:', sessionToken);
+                    console.log('Session Token:', sessionToken.split('=')[1]);
+                    alert('Login successful! Redirecting to your dashboard.');
+                    window.location.href = '/browse/dashboard.html';
                 } else {
                     console.error('Session token not found in cookies.');
+                    alert('Failed to log in. No session token found.');
                 }
-
-                // Ensure `user_data` exists
-                const userDataCookie = allCookies.find(row => row.startsWith('user_data='));
-                if (userDataCookie) {
-                    const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
-                    console.log('User Data:', userData);
-                    alert(`Welcome back, ${userData.forename} ${userData.surname}!`);
-                } else {
-                    console.error('User data not found in cookies.');
-                }
-
-                alert('Login successful! Redirecting to your dashboard.');
-                window.location.href = '/browse/dashboard.html';
             } else {
                 const result = await response.json();
                 console.error('Error response:', result);
@@ -77,21 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sessionToken = allCookies.find(row => row.startsWith('session_token='));
     if (sessionToken) {
-        console.log('Session Token:', sessionToken);
+        console.log('Session Token:', sessionToken.split('=')[1]);
     } else {
         console.log('No session token found.');
-    }
-
-    const userDataCookie = allCookies.find(row => row.startsWith('user_data='));
-    if (userDataCookie) {
-        try {
-            const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
-            console.log('Parsed user data:', userData);
-            alert(`Welcome back, ${userData.forename} ${userData.surname}!`);
-        } catch (error) {
-            console.error('Error parsing user_data cookie:', error);
-        }
-    } else {
-        console.log('No user_data cookie found.');
     }
 });
