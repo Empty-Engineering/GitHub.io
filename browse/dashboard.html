@@ -88,32 +88,43 @@
                 })
                 .catch(error => console.error('Error loading navbar:', error));
 
-            // Fetch user session details using the session token
+            // Validate session using localStorage
+            const sessionToken = localStorage.getItem('session_token');
+            if (!sessionToken) {
+                alert('No session token found. Please log in again.');
+                window.location.href = '/browse/login';
+                return;
+            }
+
             try {
                 const response = await fetch('https://api.cpnacademy.co.uk/validate-session', {
                     method: 'POST',
-                    credentials: 'include', // Include cookies in the request
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${sessionToken}`
+                    },
                 });
 
                 if (response.ok) {
                     const data = await response.json();
                     const user = data.user;
-                    document.getElementById('welcome-message').textContent = `Welcome, ${user.forename} ${user.surname}!`;
+                    document.getElementById('welcome-message').textContent = `Welcome, ${user.email}!`;
                 } else {
                     console.error('Session validation failed. Redirecting to login.');
                     alert('Session expired. Please log in again.');
+                    localStorage.removeItem('session_token');
                     window.location.href = '/browse/login';
                 }
             } catch (error) {
                 console.error('Error validating session:', error);
                 alert('Failed to validate session. Please log in again.');
+                localStorage.removeItem('session_token');
                 window.location.href = '/browse/login';
             }
 
             // Logout functionality
             document.getElementById('logout-button').addEventListener('click', () => {
-                // Clear cookies on logout
-                document.cookie = 'session_token=; Max-Age=0; path=/;';
+                localStorage.removeItem('session_token');
                 alert('You have been logged out.');
                 window.location.href = '/browse/login';
             });
