@@ -97,110 +97,16 @@
 
     <!-- JavaScript -->
     <script>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6511534668087715"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - CPN Academy</title>
-    <link rel="stylesheet" href="/style/main.css">
-    <link rel="icon" type="image/png" href="/assets/logo_favicon.png"> <!-- Favicon -->
-
-    <style>
-        .header-logo {
-            height: 80px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .form-section {
-            width: 80%;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #d8d8d8;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .form-section label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        .form-section input[type="email"],
-        .form-section input[type="password"] {
-            width: 100%;          
-            padding: 10px;        
-            box-sizing: border-box; 
-            margin-bottom: 10px;  
-        }
-
-        .checkbox-wrapper {
-            margin: 15px 0; 
-        }
-
-        .inline-label {
-            margin-left: 5px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header Section -->
-    <header class="header">
-        <a href="/index">
-            <img src="/assets/logo_dark_mode.png" alt="CPN Academy Logo" class="header-logo">
-            <span class="logo-text"> Academy</span>
-        </a>
-    </header>
-
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-        <a id="home-nav" href="#">Home</a>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const homeNav = document.getElementById('home-nav');
-                const isLoggedIn = document.cookie.includes('session_token');
-                homeNav.href = isLoggedIn ? '/browse/dashboard' : '/browse/register';
-            });
-        </script>
-        <a href="/browse/courses">Courses</a>
-        <a href="/browse/about">About</a>
-        <a href="/browse/contact">Contact</a>
-        <a href="/browse/login">Sign In</a>
-    </nav>
-
-    <!-- Form Section -->
-    <section class="form-section">
-        <h2>Sign In</h2>
-        <form id="login-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="remember-me" name="remember-me">
-                <label for="remember-me" class="inline-label">Remember me</label>
-            </div>
-
-            <button type="submit" class="cta-button">Sign In</button>
-        </form>
-        <p>Don't have an account? <a href="register" class="cta-link">Sign up</a></p>
-    </section>
-
-    <!-- JavaScript -->
-    <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Parse and log the user_data cookie
             const userDataCookie = document.cookie.split('; ').find(row => row.startsWith('user_data='));
             if (userDataCookie) {
-                const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
-                alert(`Welcome back, ${userData.forename} ${userData.surname}!`);
+                try {
+                    const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
+                    alert(`Welcome back, ${userData.forename} ${userData.surname}!`);
+                } catch (error) {
+                    console.error('Error parsing user_data cookie:', error);
+                }
             }
         });
 
@@ -216,20 +122,11 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password }),
+                    credentials: 'include', // Include cookies in the request
                 });
 
                 if (response.ok) {
                     const result = await response.json();
-                    
-                    // Store session token
-                    document.cookie = `session_token=${result.token}; path=/; Secure; SameSite=Strict; ${
-                        rememberMe ? 'max-age=604800;' : ''
-                    }`;
-
-                    // Store user data
-                    document.cookie = `user_data=${encodeURIComponent(JSON.stringify(result.user))}; path=/; Secure; SameSite=Strict; ${
-                        rememberMe ? 'max-age=604800;' : ''
-                    }`;
 
                     alert('Login successful! Redirecting to your dashboard.');
                     window.location.href = '/browse/dashboard.html';
@@ -238,17 +135,10 @@
                     alert('Error: ' + result.message);
                 }
             } catch (error) {
-                console.error(error);
+                console.error('Failed to sign in:', error);
                 alert('Failed to sign in. Please try again.');
             }
         });
-    </script>
-
-    <footer class="footer">
-        <p>&copy; 2024 CPN Academy. All rights reserved. Run by CPN Industries. Scottish Registration: SC828012. VAT Registration: 479640937.</p>
-    </footer>
-</body>
-</html>
     </script>
 
     <footer class="footer">
