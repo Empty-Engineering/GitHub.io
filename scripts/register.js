@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const daySelect = document.getElementById('day');
     const monthSelect = document.getElementById('month');
     const yearSelect = document.getElementById('year');
-
+//Lovely Jubbly--Sound as a Pound
     if (!daySelect || !monthSelect || !yearSelect) {
         console.error('Date dropdowns not found. Ensure the correct IDs are in the HTML.');
         return;
