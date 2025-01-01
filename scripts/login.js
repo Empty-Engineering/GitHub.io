@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed.');
-
+//Lovely jubbly--sound as a pound
     // Get the login form
     const form = document.getElementById('login-form');
     if (!form) {
