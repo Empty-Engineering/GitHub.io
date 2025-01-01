@@ -67,20 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Construct birthday in YYYY-MM-DD format
-        const birthday = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        console.log('Constructed birthday:', birthday);
+        const birthdate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+console.log('Constructed birthdate:', birthdate);
 
-        // Backend API URL
-        const apiUrl = 'https://api.cpnacademy.co.uk/register';
+const apiUrl = 'https://api.cpnacademy.co.uk/register';
 
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, forename, surname, birthday, password }),
-            });
+try {
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, forename, surname, birthdate, password }), // Use 'birthdate'
+    });
+
 
             if (response.ok) {
                 alert('Registration successful! Redirecting to sign in.');
