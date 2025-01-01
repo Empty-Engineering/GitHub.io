@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed.');
-    // Lovely jubbly -- sound as a pound
 
     // Get the login form
     const form = document.getElementById('login-form');
@@ -36,14 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 console.log('Fetch result:', result);
 
-                // Ensure `session_token` exists in the response
+                // Ensure `token` exists in the response
                 const sessionToken = result.token;
                 if (sessionToken) {
                     console.log('Session Token:', sessionToken);
                     // Store the session token in localStorage
                     localStorage.setItem('session_token', sessionToken);
-                    alert('Login successful! Redirecting to your dashboard.');
-                    window.location.href = '/browse/dashboard.html';
+
+                    // Decode the token to extract the email
+                    const userEmail = parseJwt(sessionToken).email;
+                    console.log('Decoded Email:', userEmail);
+
+                    if (userEmail) {
+                        alert(`Welcome, ${userEmail}! Redirecting to your dashboard.`);
+                        window.location.href = '/browse/dashboard.html';
+                    } else {
+                        console.error('Email not found in token payload.');
+                        alert('Failed to decode user information. Please try again.');
+                    }
                 } else {
                     console.error('Session token not returned from API.');
                     alert('Failed to log in. No session token provided.');
@@ -63,7 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const sessionToken = localStorage.getItem('session_token');
     if (sessionToken) {
         console.log('Session Token from localStorage:', sessionToken);
+
+        // Decode the token to check if it's valid
+        const userEmail = parseJwt(sessionToken).email;
+        if (userEmail) {
+            console.log('User email from token:', userEmail);
+        } else {
+            console.error('Invalid token structure.');
+        }
     } else {
         console.log('No session token found in localStorage.');
     }
 });
+
+// Utility function to decode JWT
+function parseJwt(token) {
+    try {
+        const base64Payload = token.split('.')[1]; // Extract the payload
+        const payload = atob(base64Payload); // Decode Base64
+        return JSON.parse(payload); // Parse as JSON
+    } catch (error) {
+        console.error('Error decoding JWT:', error);
+        return {};
+    }
+}
